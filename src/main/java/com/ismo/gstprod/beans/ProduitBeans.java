@@ -28,13 +28,13 @@ public class ProduitBeans {
 		p.setNumProd(id);
 		
 		if(metierProduit.delete(p))
-			addMessage("Confirmed", "Produit supprime avec succes");
+			addMessage(FacesMessage.SEVERITY_INFO,"Confirmed", "Produit supprime avec succes");
 		else
-			addMessage("error", "Erreur de suppression");
+			addMessage(FacesMessage.SEVERITY_ERROR,"error", "Erreur de suppression");
 	}
 
-	public void addMessage(String summary, String detail) {
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+	public void addMessage(FacesMessage.Severity severity,String summary, String detail) {
+		FacesMessage message = new FacesMessage(severity, summary, detail);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 }
