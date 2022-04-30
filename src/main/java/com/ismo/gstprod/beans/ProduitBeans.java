@@ -1,5 +1,6 @@
 package com.ismo.gstprod.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -18,9 +19,28 @@ public class ProduitBeans {
 
 	@Autowired
 	IMetier<Produit> metierProduit;
+	
+	private Produit newProd;
+
+	public Produit getNewProd() {
+		return newProd;
+	}
+
+	public void setNewProd(Produit newProd) {
+		this.newProd = newProd;
+	}
 
 	public List<Produit> getAllproduit() {
 		return metierProduit.getAll();
+	}
+	
+	public List<String> getAllFamilles(){
+		ArrayList<String> familles = new ArrayList<String>();
+		familles.add("Electromenager");
+		familles.add("Fruit");
+		familles.add("Legumes");
+		familles.add("Epicerie");
+		return familles;
 	}
 
 	public void deleteProduit(int id) {

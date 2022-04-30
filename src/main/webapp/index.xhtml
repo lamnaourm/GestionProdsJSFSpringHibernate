@@ -32,6 +32,10 @@
 .stylebtn {
 	margin-left: 5px;
 }
+
+.styleCenter{
+	text-align: center;
+}
 </style>
 
 
@@ -40,8 +44,8 @@
 
 	<h:form>
 		<p:growl id="message" showDetail="true" />
-		
-		
+
+
 		<p:dataTable value="#{produitBeans.allproduit}" var="produit"
 			paginator="true" rows="10" styleClass="styletable">
 
@@ -78,21 +82,56 @@
 
 			<p:column headerText="Actions" styleClass="styleactions">
 				<p:commandButton icon="ui-icon-pencil" />
-				<p:commandButton icon="ui-icon-trash" styleClass="stylebtn" action="#{produitBeans.deleteProduit(produit.numProd)}" update="@form">
-					<p:confirm header="Suppresion Produit" message="Voulez-vous supprimer ce produit ?" icon="ui-icon-alert"/>
+				<p:commandButton icon="ui-icon-trash" styleClass="stylebtn"
+					action="#{produitBeans.deleteProduit(produit.numProd)}"
+					update="@form">
+					<p:confirm header="Suppresion Produit"
+						message="Voulez-vous supprimer ce produit ?" icon="ui-icon-alert" />
 				</p:commandButton>
 			</p:column>
 
 			<f:facet name="footer">
-				<p:commandButton icon="ui-icon-circle-plus" value="Nouveau produit" />
+				<p:commandButton icon="ui-icon-circle-plus" value="Nouveau produit"
+					onclick="PF('dialog1').show()" />
 			</f:facet>
 		</p:dataTable>
 
 
-		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
-            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
-            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
-        </p:confirmDialog>
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+			responsive="true" width="350">
+			<p:commandButton value="No" type="button"
+				styleClass="ui-confirmdialog-no ui-button-flat" />
+			<p:commandButton value="Yes" type="button"
+				styleClass="ui-confirmdialog-yes" />
+		</p:confirmDialog>
 	</h:form>
+
+	<p:dialog header="Header" widgetVar="dialog1" minHeight="40"
+		showEffect="fade" modal="true">
+		<f:facet name="header">
+    			Ajouter un nouveau produit
+     	</f:facet>
+     	
+     	<p:panelGrid columns="2">
+	     	<p:outputLabel value="Libelle : "/>
+	     	<p:inputText value="#{produitBeans.newProd.description}"/>
+	     	
+	     	<p:outputLabel value="Famille : "/>
+	     	<p:selectOneMenu value="#{produitBeans.newProd.famille}">
+	    		<f:selectItems value="#{produitBeans.allFamilles}"/>
+	     	</p:selectOneMenu>
+	     	
+	     	<p:outputLabel value="Prix Achat : "/>
+	     	<p:inputNumber value="#{produitBeans.newProd.prix_achat}"/>
+	     	
+	     	<p:outputLabel value="Prix Vente : "/>
+	     	<p:inputNumber value="#{produitBeans.newProd.prix_vente}"/>
+     	</p:panelGrid>
+     	
+     	<f:facet name="footer">
+			<p:commandButton value="Ajouter"/>
+	     	<p:commandButton value="Annuler" onclick="PF('dialog1').hide()"/>
+     	</f:facet>
+	</p:dialog>
 </body>
 </html>
