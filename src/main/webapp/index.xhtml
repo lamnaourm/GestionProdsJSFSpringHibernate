@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Liste des produits</title>
+	
+	<style>
+		.styletable{
+			width: 80%;
+			margin: auto;
+		}
+		
+		.styleactions {
+			text-align: center;
+		}
+	</style>
+</h:head>
+<body>
+
+	<p:dataTable value="#{produitBeans.allproduit}" var="produit" paginator="true" rows="10" styleClass="styletable">
+	
+	<f:facet name="header">
+		Liste des produits
+	</f:facet>
+		<p:column headerText="Numero">
+			#{produit.numProd}
+		</p:column>
+
+		<p:column headerText="Libelle">
+			#{produit.description}
+		</p:column>
+
+		<p:column headerText="Famille">
+			#{produit.famille}
+		</p:column>
+
+		<p:column headerText="Prix achat">
+			#{produit.prix_achat}
+		</p:column>
+
+		<p:column headerText="Prix vente">
+			#{produit.prix_vente}
+		</p:column>
+		
+		<p:column headerText="Actions" styleClass="styleactions">
+			<p:commandButton icon="ui-icon-pencil"/>
+			<p:commandButton icon="ui-icon-trash"/>
+		</p:column>
+		
+		<f:facet name="footer">
+			<p:commandButton icon="ui-icon-circle-plus" value="Nouveau produit"/>
+	</f:facet>
+	</p:dataTable>
+</body>
+</html>
