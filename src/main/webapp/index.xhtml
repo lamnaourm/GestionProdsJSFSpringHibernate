@@ -10,7 +10,7 @@
 
 	<style>
 .styletable {
-	width: 80%;
+	width: 77%;
 	margin: auto;
 }
 
@@ -21,7 +21,7 @@
 
 .styleprix {
 	text-align: right;
-	width: 12%;
+	width: 10%;
 }
 
 .stylenumprod {
@@ -29,54 +29,70 @@
 	width: 7%;
 }
 
+.stylebtn {
+	margin-left: 5px;
+}
 </style>
 
 
 </h:head>
 <body>
 
-	<p:dataTable value="#{produitBeans.allproduit}" var="produit"
-		paginator="true" rows="10" styleClass="styletable">
+	<h:form>
+		<p:growl id="message" showDetail="true" />
+		
+		
+		<p:dataTable value="#{produitBeans.allproduit}" var="produit"
+			paginator="true" rows="10" styleClass="styletable">
 
-		<f:facet name="header">
+			<f:facet name="header">
 		Liste des produits
 	</f:facet>
-		<p:column headerText="Numero" styleClass="stylenumprod">
-		
-		<p:outputLabel value="#{produit.numProd}">
-			<f:convertNumber pattern="P0000"/>
-		</p:outputLabel>
-		
-		</p:column>
+			<p:column headerText="Numero" styleClass="stylenumprod">
 
-		<p:column headerText="Libelle">
+				<p:outputLabel value="#{produit.numProd}">
+					<f:convertNumber pattern="P0000" />
+				</p:outputLabel>
+
+			</p:column>
+
+			<p:column headerText="Libelle">
 			#{produit.description}
 		</p:column>
 
-		<p:column headerText="Famille">
+			<p:column headerText="Famille">
 			#{produit.famille}
 		</p:column>
 
-		<p:column headerText="Prix achat" styleClass="styleprix">
-			<p:outputLabel value="#{produit.prix_achat}">
-				<f:convertNumber pattern="#0.00 DH" />
-			</p:outputLabel>
-		</p:column>
+			<p:column headerText="Prix achat" styleClass="styleprix">
+				<p:outputLabel value="#{produit.prix_achat}">
+					<f:convertNumber pattern="#0.00 DH" />
+				</p:outputLabel>
+			</p:column>
 
-		<p:column headerText="Prix vente" styleClass="styleprix">
-			<p:outputLabel value="#{produit.prix_vente}">
-				<f:convertNumber pattern="#0.00 DH" />
-			</p:outputLabel>
-		</p:column>
+			<p:column headerText="Prix vente" styleClass="styleprix">
+				<p:outputLabel value="#{produit.prix_vente}">
+					<f:convertNumber pattern="#0.00 DH" />
+				</p:outputLabel>
+			</p:column>
 
-		<p:column headerText="Actions" styleClass="styleactions">
-			<p:commandButton icon="ui-icon-pencil" />
-			<p:commandButton icon="ui-icon-trash" />
-		</p:column>
+			<p:column headerText="Actions" styleClass="styleactions">
+				<p:commandButton icon="ui-icon-pencil" />
+				<p:commandButton icon="ui-icon-trash" styleClass="stylebtn" action="#{produitBeans.deleteProduit(produit.numProd)}" update="@form">
+					<p:confirm header="Suppresion Produit" message="Voulez-vous supprimer ce produit ?" icon="ui-icon-alert"/>
+				</p:commandButton>
+			</p:column>
 
-		<f:facet name="footer">
-			<p:commandButton icon="ui-icon-circle-plus" value="Nouveau produit" />
-		</f:facet>
-	</p:dataTable>
+			<f:facet name="footer">
+				<p:commandButton icon="ui-icon-circle-plus" value="Nouveau produit" />
+			</f:facet>
+		</p:dataTable>
+
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+        </p:confirmDialog>
+	</h:form>
 </body>
 </html>
