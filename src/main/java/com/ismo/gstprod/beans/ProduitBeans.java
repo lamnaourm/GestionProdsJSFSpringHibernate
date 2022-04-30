@@ -20,7 +20,7 @@ public class ProduitBeans {
 	@Autowired
 	IMetier<Produit> metierProduit;
 	
-	private Produit newProd;
+	private Produit newProd=new Produit();
 
 	public Produit getNewProd() {
 		return newProd;
@@ -51,6 +51,14 @@ public class ProduitBeans {
 			addMessage(FacesMessage.SEVERITY_INFO,"Confirmed", "Produit supprime avec succes");
 		else
 			addMessage(FacesMessage.SEVERITY_ERROR,"error", "Erreur de suppression");
+	}
+	
+	
+	public void addProduit() {
+		if(metierProduit.save(newProd)) {
+			addMessage(FacesMessage.SEVERITY_INFO,"Confirmed", "Produit ajoute avec succes");
+		}else 
+			addMessage(FacesMessage.SEVERITY_ERROR,"Confirmed", "Echec d'ajout");
 	}
 
 	public void addMessage(FacesMessage.Severity severity,String summary, String detail) {

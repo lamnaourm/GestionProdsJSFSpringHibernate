@@ -33,7 +33,7 @@
 	margin-left: 5px;
 }
 
-.styleCenter{
+.styleCenter {
 	text-align: center;
 }
 </style>
@@ -104,34 +104,39 @@
 			<p:commandButton value="Yes" type="button"
 				styleClass="ui-confirmdialog-yes" />
 		</p:confirmDialog>
-	</h:form>
 
-	<p:dialog header="Header" widgetVar="dialog1" minHeight="40"
-		showEffect="fade" modal="true">
-		<f:facet name="header">
+		<p:dialog header="Header" widgetVar="dialog1" minHeight="40"
+			showEffect="fade" modal="true">
+			<f:facet name="header">
     			Ajouter un nouveau produit
      	</f:facet>
-     	
-     	<p:panelGrid columns="2">
-	     	<p:outputLabel value="Libelle : "/>
-	     	<p:inputText value="#{produitBeans.newProd.description}"/>
-	     	
-	     	<p:outputLabel value="Famille : "/>
-	     	<p:selectOneMenu value="#{produitBeans.newProd.famille}">
-	    		<f:selectItems value="#{produitBeans.allFamilles}"/>
-	     	</p:selectOneMenu>
-	     	
-	     	<p:outputLabel value="Prix Achat : "/>
-	     	<p:inputNumber value="#{produitBeans.newProd.prix_achat}"/>
-	     	
-	     	<p:outputLabel value="Prix Vente : "/>
-	     	<p:inputNumber value="#{produitBeans.newProd.prix_vente}"/>
-     	</p:panelGrid>
-     	
-     	<f:facet name="footer">
-			<p:commandButton value="Ajouter"/>
-	     	<p:commandButton value="Annuler" onclick="PF('dialog1').hide()"/>
-     	</f:facet>
-	</p:dialog>
+
+
+			<p:growl id="message1" showDetail="true" />
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Libelle : " />
+				<p:inputText value="#{produitBeans.newProd.description}" />
+
+				<p:outputLabel value="Famille : " />
+				<p:selectOneMenu value="#{produitBeans.newProd.famille}">
+					<f:selectItems value="#{produitBeans.allFamilles}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Prix Achat : " />
+				<p:inputNumber value="#{produitBeans.newProd.prix_achat}" />
+
+				<p:outputLabel value="Prix Vente : " />
+				<p:inputNumber value="#{produitBeans.newProd.prix_vente}" />
+			</p:panelGrid>
+
+			<f:facet name="footer">
+				<p:commandButton value="Ajouter"
+					action="#{produitBeans.addProduit()}" update="@form" />
+				<p:commandButton value="Annuler" onclick="PF('dialog1').hide()" />
+			</f:facet>
+
+		</p:dialog>
+
+	</h:form>
 </body>
 </html>
