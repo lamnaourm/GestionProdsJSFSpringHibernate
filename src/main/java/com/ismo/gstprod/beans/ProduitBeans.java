@@ -7,10 +7,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ismo.gstprod.metier.IMetier;
+import com.ismo.gstprod.metier.MetierProduit;
 import com.ismo.gstprod.models.Produit;
 
 @ManagedBean
@@ -51,6 +53,13 @@ public class ProduitBeans {
 			addMessage(FacesMessage.SEVERITY_INFO,"Confirmed", "Produit supprime avec succes");
 		else
 			addMessage(FacesMessage.SEVERITY_ERROR,"error", "Erreur de suppression");
+	}
+	
+	public void updateProduit(int id) {
+		
+		newProd = metierProduit.getOne(id);
+		PrimeFaces current = PrimeFaces.current();
+		current.executeScript("PF('dialog1').show()");
 	}
 	
 	

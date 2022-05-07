@@ -81,7 +81,11 @@
 			</p:column>
 
 			<p:column headerText="Actions" styleClass="styleactions">
-				<p:commandButton icon="ui-icon-pencil" />
+				<p:commandButton icon="ui-icon-pencil" action="#{produitBeans.updateProduit(produit.numProd)}"
+				update="@form">
+					<p:confirm header="Modification Produit"
+							message="Voulez-vous modifier ce produit ?" icon="ui-icon-alert" />
+					</p:commandButton>
 				<p:commandButton icon="ui-icon-trash" styleClass="stylebtn"
 					action="#{produitBeans.deleteProduit(produit.numProd)}"
 					update="@form">
@@ -111,7 +115,6 @@
     			Ajouter un nouveau produit
      	</f:facet>
 
-
 			<p:growl id="message1" showDetail="true" />
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Libelle : " />
@@ -130,7 +133,7 @@
 			</p:panelGrid>
 
 			<f:facet name="footer">
-				<p:commandButton value="Ajouter"
+				<p:commandButton value="Enregistrer"
 					action="#{produitBeans.addProduit()}" update="@form" />
 				<p:commandButton value="Annuler" onclick="PF('dialog1').hide()" />
 			</f:facet>
